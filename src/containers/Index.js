@@ -26,31 +26,26 @@ class Index extends Component {
   }
 
   render(){
+    if (this.state.posts.length === 0) {
+      return (
+        <Typography variant="h1" component="h2">
+          まだなにも投稿されていません。
+        </Typography>
+      )
+    }
+
     return(
-      <div>
-        {(() => {
-          if (this.state.posts.length > 0) {
-            return (
-              this.state.posts.map( (post, i) => {
-                return(
-                  <Post
-                    key={i}
-                    createdAt={post.created_at}
-                    name='testUser'
-                    title={post.title}
-                    content={post.content}
-                  />
-                )
-              })
-            )
-          } else {
-            return (
-              <Typography variant="h1" component="h2">
-                まだなにも投稿されていません。
-              </Typography>
-              )
-          }
-        })()}
+      <div>{
+        this.state.posts.map( (post, i) =>
+          <Post
+            key={i}
+            createdAt={post.created_at}
+            name='testUser'
+            title={post.title}
+            content={post.content}
+          />
+        )
+      }
       </div>
     );
   }
